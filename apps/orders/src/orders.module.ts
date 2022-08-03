@@ -2,7 +2,7 @@ import { DatabaseModule } from '@app/common';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { object, string } from 'joi';
+import Joi, { object, string } from 'joi';
 import { OrdersController } from './orders.controller';
 import { OrdersService } from './orders.service';
 import { OrdersRepository } from './repositories/orders.repository';
@@ -14,6 +14,7 @@ import { Order, OrderSchema } from './schemas/order.schema';
       isGlobal: true,
       validationSchema: object({
         MONGODB_URI: string().required(),
+        PORT: Joi.number().required(),
       }),
       envFilePath: './apps/orders/.env',
     }),
